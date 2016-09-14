@@ -44,17 +44,20 @@ AppAsset::register($this);
             } else {
                 $menuItems = [
                     ['label' => 'Inicio', 'url' => ['/site/index']],
-                    ['label' => 'Cuenta', 'url' => ['/user/settings/account']],
                     ['label' => 'Actividades', 'url' => ['/actividades']],
                     //['label' => 'BACKEND', 'url' => '../../backend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],
                 ];
-                $menuItems[] = '<li>'
+         $menuItems[] = '<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Perfil <b class="caret"></b></a>'
+                               .'<ul id="w4" class="dropdown-menu">'
+                                .'<li><a href="'.Yii::$app->homeUrl.'user/settings/account" tabindex="-1">Mi cuenta</a></li>'
+                        .'<li>'
                         . Html::beginForm(['/site/logout'], 'post')
                         . Html::submitButton(
-                                'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link']
+                                'Salir (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link']
                         )
                         . Html::endForm()
-                        . '</li>';
+                        . '</li>'
+                        . '</ul>';
             }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],

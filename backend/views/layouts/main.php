@@ -41,11 +41,10 @@ AppAsset::register($this);
             } else {
                 $menuItems = [
                     ['label' => 'Inicio', 'url' => ['/site/index']],
-                    ['label' => 'Cuenta', 'url' => ['/user/settings/account']],
                     //['label' => 'FRONTEND', 'url' => '../../frontend/web','visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),],
                 ];
                 $menuItems[] = [
-                    'label' => 'ADMINISTRACION',
+                    'label' => 'Administración',
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),
                     'items' => [
                         ['label' => 'Usuarios', 'url' => ['/user/admin/index'],],
@@ -56,7 +55,7 @@ AppAsset::register($this);
                     ],
                 ];
                 $menuItems[] = [
-                    'label' => 'REPORTES',
+                    'label' => 'Reportes',
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),
                     'items' => [
                         ['label' => 'Semanales', 'url' => ['/actividades/semana'],],                        ['label' => 'Mensuales', 'url' => ['/actividades/mes'],],
@@ -64,7 +63,7 @@ AppAsset::register($this);
                     ],
                 ];
                 $menuItems[] = [
-                    'label' => 'AUDITORIA',
+                    'label' => 'Auditoría',
                     'visible' => Yii::$app->user->identity->isAdmin || Yii::$app->user->can('admin'),
                     'items' => [
                         ['label' => 'Accesos', 'url' => ['/audit/entry'],],
@@ -73,13 +72,17 @@ AppAsset::register($this);
                     ],
                 ];
 
-                $menuItems[] = '<li>'
+                $menuItems[] = '<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Perfil <b class="caret"></b></a>'
+                               .'<ul id="w4" class="dropdown-menu">'
+                                .'<li><a href="'.Yii::$app->homeUrl.'user/settings/account" tabindex="-1">Mi cuenta</a></li>'
+                        .'<li>'
                         . Html::beginForm(['/site/logout'], 'post')
                         . Html::submitButton(
-                                'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link']
+                                'Salir (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link']
                         )
                         . Html::endForm()
-                        . '</li>';
+                        . '</li>'
+                        . '</ul>';
             }
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],
